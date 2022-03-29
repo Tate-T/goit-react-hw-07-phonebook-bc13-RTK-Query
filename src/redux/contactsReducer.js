@@ -38,4 +38,16 @@ export const filterReducer = createReducer('', {
 
 });
 
+const setError = (_, { payload }) => payload;
+const resetError = () => null;
+
+export const errorReducer = createReducer(null, {
+    [addContactError]: setError,
+    [addContactApiRequest]: resetError,
+    [getContacts.rejected]: setError,
+    [getContacts.pending]: resetError,
+    [deleteContact.rejected]: setError,
+    [deleteContact.pending]: resetError,
+});
+
 // export default { сontactsReducer, isLoadingReducer, filterReducer };
