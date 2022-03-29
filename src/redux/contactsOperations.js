@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { addContactApi, getContactApi, deleteContactApi, filterContactsApi } from "services/mockapi";
 import { addContactApiRequest, addContactSuccess, addContactError } from './contactsActions';
 
-// спосіб RTC:
+// спосіб 1:
 
 export const addContact = (contact) => {
     return (dispatch) => {
