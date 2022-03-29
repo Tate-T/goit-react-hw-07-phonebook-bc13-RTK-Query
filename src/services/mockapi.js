@@ -1,17 +1,27 @@
-const BASE_URL = 'https://6216b55b71e7672e53694d32.mockapi.io/';
-// const KEY = '';
+import axios from 'axios';
 
-async function fetchWithErrorHandling(url = '') {
-    const response = await fetch(url);
-    return response.ok
-        ? await response.json()
-        : Promise.reject(new Error('Not found'));
-}
+axios.defaults.baseURL = 'https://6216b55b71e7672e53694d32.mockapi.io';
 
-function fetchAddcotact(endpoint) {
-    return fetchWithErrorHandling(`${BASE_URL}/${endpoint}`);
-}
+export const addContactApi = (contact) => {
+    return axios.post('/$mockData', contact)
+        .then(({ data }) => ({ ...contact, id: data.id }))
+        .catch((err) => err)
+};
 
-const fetches = { fetchAddcotact }
+// const BASE_URL = 'https://6216b55b71e7672e53694d32.mockapi.io/';
+// // const KEY = '';
 
-export default fetches
+// async function fetchWithErrorHandling(url = '') {
+//     const response = await fetch(url);
+//     return response.ok
+//         ? await response.json()
+//         : Promise.reject(new Error('Not found'));
+// }
+
+// function fetchAddcotact(endpoint) {
+//     return fetchWithErrorHandling(`${BASE_URL}/${endpoint}`);
+// }
+
+// const fetches = { fetchAddcotact }
+
+// export default fetches
