@@ -1,5 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import shortid from 'shortid';
+import { addContactApiRequest, addContactSuccess, addContactError } from "./contactsActions";
 // import actions from './contactsActions';
 
 const initialState = [
@@ -9,14 +10,20 @@ const initialState = [
     { id: shortid.generate(), name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-const сontactsReducer = createReducer(initialState, {
-    'phonebook/addContact': (state, { payload }) => [...state, payload],
+export const сontactsReducer = createReducer(initialState, {
+    'phonebook/addContactSuccess': (state, { payload }) => [...state, payload],
     'phonebook/deleteContact': (state, { payload }) =>
         state.filter(contact => contact.id !== payload)
 });
 
-const filterReducer = createReducer('', {
+export const isLoadingReducer = createReducer(false, {
+    [addContactApiRequest]: () => true,
+    [addContactSuccess]: () => false,
+    [addContactError]: () => false,
+})
+
+export const filterReducer = createReducer('', {
     'phonebook/addToFilterState': (_, { payload }) => payload,
 });
 
-export default { сontactsReducer, filterReducer };
+// export default { сontactsReducer, isLoadingReducer, filterReducer };

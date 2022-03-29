@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import s from './ContactForm.module.css';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import * as contactsActions from '../../redux/contactsActions';
 
 const ContactForm = ({ contacts, onSubmitAddContact }) => {
+
+    const isLoading = useSelector(state => state.contacts.isLoading);
 
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
@@ -65,6 +67,7 @@ const ContactForm = ({ contacts, onSubmitAddContact }) => {
                 </label>
             </div>
             <button type="submit" >Add contact</button>
+            {isLoading && <h3>Loading...</h3>}
         </form >
     )
 }
