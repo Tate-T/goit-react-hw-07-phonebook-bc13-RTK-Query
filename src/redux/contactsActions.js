@@ -3,9 +3,9 @@ import { createAction } from "@reduxjs/toolkit";
 
 // export const addContact = createAction('phonebook/addContact', contact => ({ payload: { id: shortid.generate(), ...contact } }));
 
-export const deleteContact = createAction('phonebook/deleteContact');
+// export const deleteContact = createAction('phonebook/deleteContact');
 
-export const addToFilterState = createAction('phonebook/addToFilterState');
+// export const addToFilterState = createAction('phonebook/addToFilterState');
 
 export const addContactApiRequest = createAction('addContactApiRequest');
 

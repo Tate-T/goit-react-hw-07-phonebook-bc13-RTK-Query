@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import s from './ContactForm.module.css';
-import { connect, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import * as contactsActions from '../../redux/contactsActions';
+import { addContact } from '../../redux/contactsOperations';
 
 const ContactForm = ({ contacts, onSubmitAddContact }) => {
+
+    const dispatch = useDispatch();
 
     const isLoading = useSelector(state => state.contacts.isLoading);
 
@@ -29,11 +32,15 @@ const ContactForm = ({ contacts, onSubmitAddContact }) => {
 
     const onSubmit = (e) => {
         e.preventDefault()
+
+        dispatch(addContact({ name, number }));
         if (isThereThisContact(name)) {
             alert(`${name} already exist`)
             return
         }
+
         onSubmitAddContact({ name, number })
+
         setName('');
         setNumber('')
     }
@@ -74,7 +81,7 @@ const ContactForm = ({ contacts, onSubmitAddContact }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitAddContact: (contact) => dispatch(contactsActions.addContact(contact)),
+        onSubmitAddContact: (contact) => dispatch(contactsActions.addContactApiRequest(contact)),
     }
 }
 

@@ -1,21 +1,17 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import { сontactsReducer, filterReducer, isLoadingReducer } from './contactsReducer';
+
 // import logger from "redux-logger";
-import reducer from './contactsReducer';
-import { contactsApi } from '';
-
-// const contactsLogger = (store) => (next) => (action) {
-//     next(action)
-// }
-
 // const middleware = [...getDefaultMiddleware(), logger];
 
 export const store = configureStore({
     reducer: {
-        contacts: reducer.сontactsReducer,
-        filter: reducer.filterReducer
+        contacts: сontactsReducer,
+        filter: filterReducer,
+        isLoading: isLoadingReducer
     },
     middleware: (getDefaultMiddleware) => {
-        return getDefaultMiddleware().concat(contactsApi.middleware)
+        return getDefaultMiddleware()
     },
     devTools: process.env.NODE_ENV !== 'production', // true
 });
