@@ -20,11 +20,11 @@ export const deleteContactApi = (id) => {
         .catch((err) => err);
 };
 
-export const filterContactsApi = (id) => {
-    return axios.filter(`/contacts/${id}`)
-        .then(({ data }) => data.id)
-        .catch((err) => err);
-};
+// export const filterContactsApi = (id) => {
+//     return axios.filter(`/contacts/${id}`)
+//         .then(({ data }) => data.id === id)
+//         .catch((err) => err);
+// };
 
 // const BASE_URL = 'https://6216b55b71e7672e53694d32.mockapi.io/';
 // // const KEY = '';

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addContactApi, getContactApi, deleteContactApi, filterContactsApi } from "services/mockapi";
+import { addContactApi, getContactApi, deleteContactApi } from "services/mockapi";
 import { addContactApiRequest, addContactSuccess, addContactError } from './contactsActions';
 
 // спосіб 1:
@@ -34,11 +34,11 @@ export const deleteContact = createAsyncThunk('contacts/delete/:id', async (id, 
     }
 });
 
-export const findContact = createAsyncThunk('contacts/get/:id', async (id, thunkApi) => {
-    try {
-        const contact = await filterContactsApi(id);
-        return contact;
-    } catch (error) {
-        return thunkApi.rejectWithValue(error.message);
-    }
-});
+// export const findContact = createAsyncThunk('contacts/get/:id', async (id, thunkApi) => {
+//     try {
+//         const contact = await filterContactsApi(id);
+//         return contact;
+//     } catch (error) {
+//         return thunkApi.rejectWithValue(error.message);
+//     }
+// });
