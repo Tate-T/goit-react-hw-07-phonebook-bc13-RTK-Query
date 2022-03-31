@@ -1,18 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { сontactsReducer, filterReducer, isLoadingReducer, errorReducer } from './contactsReducer';
-
-// import logger from "redux-logger";
-// const middleware = [...getDefaultMiddleware(), logger];
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { filterReducer } from './filterReducer';
+import { сontactsApi } from './contactsApi';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
 export const store = configureStore({
     reducer: {
-        contacts: сontactsReducer,
+        [сontactsApi.reducerPath]: сontactsApi.reducer,
         filter: filterReducer,
-        isLoading: isLoadingReducer,
-        error: errorReducer
     },
     middleware: (getDefaultMiddleware) => {
-        return getDefaultMiddleware()
+        return getDefaultMiddleware().concat(сontactsApi.middleware);
     },
     devTools: process.env.NODE_ENV !== 'production', // true
 });
+setupListeners(store.dispatch)

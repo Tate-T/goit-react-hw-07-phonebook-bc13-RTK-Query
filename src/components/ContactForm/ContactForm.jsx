@@ -1,16 +1,13 @@
 import { useState } from 'react';
 import s from './ContactForm.module.css';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/contactsOperations';
+import { useAddContactMutation } from '../../redux/contactsApi';
 
-const ContactForm = ({ contacts, onSubmitAddContact }) => {
-
-    const dispatch = useDispatch();
-
-    const isLoading = useSelector(state => state.contacts.isLoading);
+export const ContactForm = ({ contacts, onSubmitAddContact }) => {
 
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
+
+    const [addContact, { isLoading }] = useAddContactMutation();
 
     const handleInputChange = (e) => {
         const { name, value } = e.currentTarget;
@@ -32,7 +29,7 @@ const ContactForm = ({ contacts, onSubmitAddContact }) => {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        dispatch(addContact({ name, number }));
+        addContact({ name, number });
         if (isThereThisContact(name)) {
             alert(`${name} already exist`)
             return
@@ -77,11 +74,3 @@ const ContactForm = ({ contacts, onSubmitAddContact }) => {
         </form >
     )
 }
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onSubmitAddContact: (contact) => dispatch(addContact(contact)),
-    }
-}
-
-export default connect(null, mapDispatchToProps)(ContactForm);

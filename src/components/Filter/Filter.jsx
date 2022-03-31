@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import s from './Filter.module.css';
-import { addToFilterState } from '../../redux/contactsActions';
+import { addToFilterState } from '../../redux/filterActions';
 
 const Filter = ({ filter, addToFilterState }) => {
     return (

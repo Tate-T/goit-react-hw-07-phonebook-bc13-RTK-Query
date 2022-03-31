@@ -1,9 +1,14 @@
-import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
-import { connect } from 'react-redux';
-import { deleteContact } from '../../redux/contactsOperations';
+import { useGetContactsQuery, useDeleteContactMutation } from '../../redux/contactsApi';
 
-const ContactList = ({ filter, contacts, deleteContact }) => {
+export const ContactList = ({ filter }) => {
+
+    const { data: contacts } = useGetContactsQuery();
+    console.log(contacts)
+
+    // const [deleteContact, { data: contacts/id, error, isLoading }] = useDeleteContactMutation();
+    const [deleteContact] = useDeleteContactMutation();
+
     const findContact = () => {
         return contacts.filter(contact =>
             contact.name.toLowerCase().includes(filter?.toLowerCase())
@@ -27,25 +32,3 @@ const ContactList = ({ filter, contacts, deleteContact }) => {
         </div>
     )
 }
-
-ContactList.propTypes = {
-    deleteContact: PropTypes.func.isRequired,
-};
-
-
-const mapStateToProps = state => {
-    return {
-        contacts: state.contacts,
-        filter: state.filter
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        deleteContact: (id) => dispatch(deleteContact(id))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
-
-
