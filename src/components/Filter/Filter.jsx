@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
-import { addToFilterState } from '../../redux/contactsActions';
 import s from './Filter.module.css';
+import { addToFilterState } from '../../redux/contactsActions';
 
 const Filter = ({ filter, addToFilterState }) => {
-
     return (
         <div className={s.filter}>
             <label className={s.filterTitle}>

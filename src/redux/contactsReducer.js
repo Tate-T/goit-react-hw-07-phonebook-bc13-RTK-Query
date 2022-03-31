@@ -1,5 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import shortid from 'shortid';
+import { addToFilterState } from './contactsActions';
 import { addContact, getContacts, deleteContact } from './contactsOperations';
 
 const initialState = [
@@ -14,6 +15,10 @@ export const сontactsReducer = createReducer(initialState, {
     [getContacts.fulfilled]: (_, { payload }) => payload,
     [deleteContact.fulfilled]: (state, { payload }) =>
         state.filter(contact => contact.id !== payload)
+});
+
+export const filterReducer = createReducer('', {
+    [addToFilterState]: (_, { payload }) => payload,
 });
 
 export const isLoadingReducer = createReducer(false, {
