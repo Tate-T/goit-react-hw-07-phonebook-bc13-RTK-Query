@@ -3,16 +3,19 @@ import { useGetContactsQuery, useDeleteContactMutation } from '../../redux/conta
 
 export const ContactList = ({ filter }) => {
 
-    const { data: contacts } = useGetContactsQuery();
-    console.log(contacts)
+    const response = useGetContactsQuery();
+    const { data: contacts } = response;
 
     // const [deleteContact, { data: contacts/id, error, isLoading }] = useDeleteContactMutation();
     const [deleteContact] = useDeleteContactMutation();
 
     const findContact = () => {
-        return contacts.filter(contact =>
+        if (!filter) {
+            return contacts || []
+        }
+        return contacts?.filter(contact =>
             contact.name.toLowerCase().includes(filter?.toLowerCase())
-        );
+        ) || [];
     }
 
     return (
